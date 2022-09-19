@@ -127,3 +127,9 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# test files
+test*.py
+test*.txt
+!/tests/test*.py
+!/tests/effect/
