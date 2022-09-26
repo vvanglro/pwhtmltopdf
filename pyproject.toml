@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pwhtmltopdf"
-version = "0.1.0"
+version = "0.1.1"
 description = "playwright render html to pdf"
 authors = ["vvanglro"]
 license = "Apache-2.0"
@@ -12,8 +12,8 @@ keywords = ["playwright", "html", "pdf"]
 exclude = ["tests/effect"]
 
 [tool.poetry.dependencies]
-python = ">=3.7,<3.11"
-playwright = "^1.25.2"
+python = ">=3.7,<4"
+playwright = "*"
 jinja2 = "^3.1.2"
 
 [tool.poetry.dev-dependencies]
