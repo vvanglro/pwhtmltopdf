@@ -8,7 +8,7 @@ from pwhtmltopdf.pw import PlayWrightServer
 from pwhtmltopdf.types import StrPath, StrPathLike
 
 
-class BaseHTP:
+class BaseHTP(abc.ABC):
     def __init__(self, static_root: StrPath = None):
         """
         param static_root: The resource directory in html, which is passed in for subsequent rendering
