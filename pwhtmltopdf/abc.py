@@ -38,6 +38,8 @@ class BaseHTP(abc.ABC):
     async def _temp_render(self, content: str, output_path: StrPath = None) -> bytes:
         with tempfile.NamedTemporaryFile(suffix=".html") as file:
             file.write(content.encode("utf-8"))
+            # If the content is too small, it will not write to the disk. Call the write manually.
+            file.flush()
             url = f"file://{file.name}"
             return await self._page_render(url, output_path)
 
