@@ -1,6 +1,7 @@
 import abc
 import pathlib
 import tempfile
+import typing
 
 from jinja2 import Template
 
@@ -9,18 +10,33 @@ from pwhtmltopdf.types import StrPath, StrPathLike
 
 
 class BaseHTP(abc.ABC):
-    def __init__(self, static_root: StrPath = None):
+    def __init__(
+        self,
+        static_root: StrPath = None,
+        wait_until: typing.Optional[
+            typing.Literal["commit", "domcontentloaded", "load", "networkidle"]
+        ] = None,
+        print_background: typing.Optional[bool] = None,
+        prefer_css_page_size: typing.Optional[bool] = None,
+    ):
         """
         param static_root: The resource directory in html, which is passed in for subsequent rendering
         """
         self.pw_server = PlayWrightServer()
         self.static_root = static_root
+        self.wait_until = wait_until
+        self.print_background = print_background
+        self.prefer_css_page_size = prefer_css_page_size
 
     async def _page_render(self, url: str, output_path: StrPath = None) -> bytes:
         async with self.pw_server.new_page() as page:
-            await page.goto(url, wait_until="load")
+            await page.goto(url, wait_until=self.wait_until)
             await page.emulate_media(media="print")
-            return await page.pdf(path=output_path)
+            return await page.pdf(
+                path=output_path,
+                print_background=self.print_background,
+                prefer_css_page_size=self.prefer_css_page_size,
+            )
 
     async def _content_render(
         self, content: str, output_path: StrPath = None, **render_kwargs
