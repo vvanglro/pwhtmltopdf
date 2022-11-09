@@ -52,6 +52,7 @@ Render fill:
 When `local_render` is equal to true, jinja2 template syntax will be used to render filled html,
 If html needs to use local static resources, you need to set `static_root`,
 If you want to render filled data dynamically to generate pdf(Based on jinja2), try the following method👇
+
 ```python
 import asyncio
 import pathlib
@@ -60,14 +61,13 @@ from pwhtmltopdf import HtmlToPdf
 
 async def this_render_from_url():
     file_path = pathlib.Path("tests/images.html").absolute()
-    htp = HtmlToPdf(static_root="tests/static")
-    await htp.from_url(
-        f"file://{file_path}",
-        "tests/effect/from_url/local_url_render.pdf",
-        local_render=True,
-        char_code=123,
-    )
-    await htp.close()
+    async with HtmlToPdf(static_root="tests/static", wait_until="load", print_background=True) as htp:
+        await htp.from_url(
+            f"file://{file_path}",
+            "tests/effect/from_url/local_url_render.pdf",
+            local_render=True,
+            char_code=123,
+        )
 
 
 async def this_render_from_file():
