@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pwhtmltopdf"
-version = "0.1.5"
+version = "0.1.6"
 description = "playwright render html to pdf"
 authors = ["vvanglro"]
 license = "Apache-2.0"
