@@ -30,5 +30,7 @@ class PlayWrightServer:
     async def close(self) -> None:
         if self.browser is not None:
             await self.browser.close()
+            self.browser = None
         if self.server is not None:
             await self.server.stop()  # type: ignore
+            self.server = None

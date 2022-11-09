@@ -2,6 +2,7 @@ import abc
 import pathlib
 import tempfile
 import typing
+from types import TracebackType
 
 from jinja2 import Template
 
@@ -94,3 +95,14 @@ class BaseHTP(abc.ABC):
 
     async def close(self) -> None:
         await self.pw_server.close()
+
+    async def __aenter__(self) -> "BaseHTP":
+        return self
+
+    async def __aexit__(
+        self,
+        exc_type: typing.Optional[typing.Type[BaseException]],
+        exc_val: typing.Optional[BaseException],
+        exc_tb: typing.Optional[TracebackType],
+    ) -> None:
+        await self.close()
