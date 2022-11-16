@@ -11,14 +11,18 @@ from pwhtmltopdf.types import StrPath, StrPathLike
 
 
 class BaseHTP(abc.ABC):
+    # todo  args to dict args, pdf_kwargs={"print_background":None,}
     def __init__(
         self,
         static_root: StrPath = None,
+        timeout: typing.Optional[float] = None,
         wait_until: typing.Optional[
             typing.Literal["commit", "domcontentloaded", "load", "networkidle"]
         ] = None,
         print_background: typing.Optional[bool] = None,
         prefer_css_page_size: typing.Optional[bool] = None,
+        width: typing.Optional[typing.Union[str, float]] = None,
+        height: typing.Optional[typing.Union[str, float]] = None,
     ):
         """
         param static_root: The resource directory in html, which is passed in for subsequent rendering
@@ -28,15 +32,20 @@ class BaseHTP(abc.ABC):
         self.wait_until = wait_until
         self.print_background = print_background
         self.prefer_css_page_size = prefer_css_page_size
+        self.timeout = timeout
+        self.width = width
+        self.height = height
 
     async def _page_render(self, url: str, output_path: StrPath = None) -> bytes:
         async with self.pw_server.new_page() as page:
-            await page.goto(url, wait_until=self.wait_until)
+            await page.goto(url, wait_until=self.wait_until, timeout=self.timeout)
             await page.emulate_media(media="print")
             return await page.pdf(
                 path=output_path,
                 print_background=self.print_background,
                 prefer_css_page_size=self.prefer_css_page_size,
+                width=self.width,
+                height=self.height,
             )
 
     async def _content_render(

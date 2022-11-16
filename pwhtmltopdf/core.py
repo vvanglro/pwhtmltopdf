@@ -9,17 +9,23 @@ class HtmlToPdf(BaseHTP):
     def __init__(
         self,
         static_root: StrPath = None,
+        timeout: typing.Optional[float] = None,
         wait_until: typing.Optional[
             typing.Literal["commit", "domcontentloaded", "load", "networkidle"]
         ] = None,
         print_background: typing.Optional[bool] = None,
         prefer_css_page_size: typing.Optional[bool] = None,
+        width: typing.Optional[typing.Union[str, float]] = None,
+        height: typing.Optional[typing.Union[str, float]] = None,
     ):
         super().__init__(
             static_root=static_root,
             wait_until=wait_until,
             print_background=print_background,
             prefer_css_page_size=prefer_css_page_size,
+            timeout=timeout,
+            width=width,
+            height=height,
         )
 
     async def from_url(
