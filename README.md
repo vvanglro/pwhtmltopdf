@@ -1,11 +1,12 @@
 # Playwright HTML to PDF
+[![Package version](https://img.shields.io/pypi/v/pwhtmltopdf?color=%2334D058&label=pypi%20package)](https://pypi.python.org/pypi/pwhtmltopdf)
 
-A modern html to pdf scheme based on playwright, Support more html and css technologies
+A modern html to pdf scheme based on playwright, Support more html and css technologies.
 
 ## Installation
 
 1. Install pwhtmltopdf
-    ```py
+    ```sh
    pip install pwhtmltopdf
    ```
 2. Install chromium
