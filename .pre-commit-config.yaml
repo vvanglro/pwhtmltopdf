@@ -20,6 +20,10 @@ repos:
     rev: 23.3.0
     hooks:
       - id: black
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.4.1
+    hooks:
+      - id: mypy
   - repo: local
     hooks:
       - id: python-no-print
@@ -28,11 +32,3 @@ repos:
         entry: '\bprint\('
         language: pygrep
         types: [ python ]
-      - id: mypy
-        name: mypy
-        entry: mypy
-        language: python
-        'types_or': [ python, pyi ]
-        require_serial: true
-        args: [ "--scripts-are-modules" ]
-        minimum_pre_commit_version: '2.9.2'
