@@ -16,7 +16,7 @@ async def test_from_url():
 async def test_from_url_not_output_path():
     htp = HtmlToPdf()
     pdf_bytes = await htp.from_url("https://playwright.dev/")
-    assert type(pdf_bytes) == bytes
+    assert isinstance(pdf_bytes, bytes)
     with open("effect/from_url/not_output_path.pdf", "wb") as f:
         f.write(pdf_bytes)
     await htp.close()
