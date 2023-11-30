@@ -99,9 +99,11 @@ from pwhtmltopdf import HtmlToPdf
 
 
 async def example():
-    async with HtmlToPdf(pdf_kwargs={"print_background": True}, page_kwargs={"locale": "de-DE", "is_mobile": True}) as htp:
-        await htp.from_url("https://playwright.dev/", "from_url.pdf")
+   async with HtmlToPdf(pdf_kwargs={"print_background": True},
+                        page_kwargs={"locale": "de-DE", "is_mobile": True}) as htp:
+      await htp.from_url("https://playwright.dev/", "from_url.pdf")
+
 
 if __name__ == '__main__':
-    asyncio.run(example())
+   asyncio.run(example())
 ```
