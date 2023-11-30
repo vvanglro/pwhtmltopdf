@@ -2,6 +2,7 @@ import pathlib
 import typing
 
 from pwhtmltopdf.abc import BaseHTP
+from pwhtmltopdf.structures import PageParameters, PdfParameters
 from pwhtmltopdf.types import StrPath, StrPathLike
 
 
@@ -10,22 +11,16 @@ class HtmlToPdf(BaseHTP):
         self,
         static_root: StrPath = None,
         timeout: typing.Optional[float] = None,
-        wait_until: typing.Optional[
-            typing.Literal["commit", "domcontentloaded", "load", "networkidle"]
-        ] = None,
-        print_background: typing.Optional[bool] = None,
-        prefer_css_page_size: typing.Optional[bool] = None,
-        width: typing.Optional[typing.Union[str, float]] = None,
-        height: typing.Optional[typing.Union[str, float]] = None,
+        wait_until: typing.Optional[typing.Literal["commit", "domcontentloaded", "load", "networkidle"]] = None,
+        page_kwargs: typing.Optional[PageParameters] = None,
+        pdf_kwargs: typing.Optional[PdfParameters] = None,
     ):
         super().__init__(
             static_root=static_root,
             wait_until=wait_until,
-            print_background=print_background,
-            prefer_css_page_size=prefer_css_page_size,
             timeout=timeout,
-            width=width,
-            height=height,
+            pdf_kwargs=pdf_kwargs,
+            page_kwargs=page_kwargs,
         )
 
     async def from_url(
@@ -37,9 +32,7 @@ class HtmlToPdf(BaseHTP):
         **render_kwargs,
     ) -> bytes:
         if url.startswith("file://") and local_render:
-            return await self.from_file(
-                url[7:], output_path, local_render=True, **render_kwargs
-            )
+            return await self.from_file(url[7:], output_path, local_render=True, **render_kwargs)
         return await self._page_render(url, output_path)
 
     async def from_file(

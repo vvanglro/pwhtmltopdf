@@ -60,7 +60,7 @@ from pwhtmltopdf import HtmlToPdf
 async def this_render_from_url():
     file_path = pathlib.Path("tests/images.html").absolute()
     async with HtmlToPdf(static_root="tests/static",
-                         wait_until="load", print_background=True) as htp:
+                         wait_until="load", pdf_kwargs={"print_background": True}) as htp:
         await htp.from_url(
             f"file://{file_path}",
             "tests/effect/from_url/local_url_render.pdf",
@@ -88,4 +88,20 @@ async def this_render_from_string():
 
 if __name__ == '__main__':
     asyncio.run(this_render_from_url())
+```
+
+## Advanced usage
+Support playwright [new_page](https://playwright.dev/python/docs/api/class-browser#browser-new-page) and [page.pdf](https://playwright.dev/python/docs/api/class-page#page-pdf) all parameters passthrough.
+
+```python
+import asyncio
+from pwhtmltopdf import HtmlToPdf
+
+
+async def example():
+    async with HtmlToPdf(pdf_kwargs={"print_background": True}, page_kwargs={"locale": "de-DE", "is_mobile": True}) as htp:
+        await htp.from_url("https://playwright.dev/", "from_url.pdf")
+
+if __name__ == '__main__':
+    asyncio.run(example())
 ```

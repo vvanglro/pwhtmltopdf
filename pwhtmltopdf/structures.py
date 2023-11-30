@@ -1,0 +1,56 @@
+import pathlib
+from typing import Dict, List, Literal, Optional, Pattern, TypedDict, Union
+
+from playwright.async_api import Geolocation, HttpCredentials, PdfMargins, ProxySettings, StorageState, ViewportSize
+
+
+class PdfParameters(TypedDict, total=False):
+    scale: Optional[float]
+    display_header_footer: Optional[bool]
+    header_template: Optional[str]
+    footer_template: Optional[str]
+    print_background: Optional[bool]
+    landscape: Optional[bool]
+    page_ranges: Optional[str]
+    format: Optional[str]
+    width: Optional[Union[str, float]]
+    height: Optional[Union[str, float]]
+    prefer_css_page_size: Optional[bool]
+    margin: Optional[PdfMargins]
+
+
+class PageParameters(TypedDict, total=False):
+    viewport: Optional[ViewportSize]
+    screen: Optional[ViewportSize]
+    no_viewport: Optional[bool]
+    ignore_https_errors: Optional[bool]
+    java_script_enabled: Optional[bool]
+    bypass_csp: Optional[bool]
+    user_agent: Optional[str]
+    locale: Optional[str]
+    timezone_id: Optional[str]
+    geolocation: Optional[Geolocation]
+    permissions: Optional[List[str]]
+    extra_http_headers: Optional[Dict[str, str]]
+    offline: Optional[bool]
+    http_credentials: Optional[HttpCredentials]
+    device_scale_factor: Optional[float]
+    is_mobile: Optional[bool]
+    has_touch: Optional[bool]
+    color_scheme: Optional[Literal["dark", "light", "no-preference", "null"]]
+    forced_colors: Optional[Literal["active", "none", "null"]]
+    reduced_motion: Optional[Literal["no-preference", "null", "reduce"]]
+    accept_downloads: Optional[bool]
+    default_browser_type: Optional[str]
+    proxy: Optional[ProxySettings]
+    record_har_path: Optional[Union[str, pathlib.Path]]
+    record_har_omit_content: Optional[bool]
+    record_video_dir: Optional[Union[str, pathlib.Path]]
+    record_video_size: Optional[ViewportSize]
+    storage_state: Optional[Union[StorageState, str, pathlib.Path]]
+    base_url: Optional[str]
+    strict_selectors: Optional[bool]
+    service_workers: Optional[Literal["allow", "block"]]
+    record_har_url_filter: Optional[Union[str, Pattern[str]]]
+    record_har_mode: Optional[Literal["full", "minimal"]]
+    record_har_content: Optional[Literal["attach", "embed", "omit"]]
