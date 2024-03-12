@@ -65,8 +65,7 @@ class BaseHTP(abc.ABC):
         *,
         local_render: bool = False,
         **render_kwargs,
-    ) -> bytes:
-        ...
+    ) -> bytes: ...
 
     @abc.abstractmethod
     async def from_file(
@@ -76,8 +75,7 @@ class BaseHTP(abc.ABC):
         *,
         local_render: bool = False,
         **render_kwargs,
-    ) -> bytes:
-        ...
+    ) -> bytes: ...
 
     @abc.abstractmethod
     async def from_string(
@@ -87,8 +85,7 @@ class BaseHTP(abc.ABC):
         *,
         local_render: bool = False,
         **render_kwargs,
-    ) -> bytes:
-        ...
+    ) -> bytes: ...
 
     async def close(self) -> None:
         await self.pw_server.close()
