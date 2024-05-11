@@ -1,4 +1,4 @@
-# Playwright HTML to PDF
+# Playwright Html To Pdf
 [![Package version](https://img.shields.io/pypi/v/pwhtmltopdf?color=%2334D058&label=pypi%20package)](https://pypi.python.org/pypi/pwhtmltopdf)
 
 A modern html to pdf scheme based on playwright, Support more html and css technologies.
