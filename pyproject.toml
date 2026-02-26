@@ -3,7 +3,7 @@ authors = [
     {name = "vvanglro", email = "vvanglro@gmail.com"},
 ]
 license = {text = "Apache-2.0"}
-requires-python = ">=3.8,<4.0"
+requires-python = ">=3.10,<4.0"
 dependencies = [
     "playwright",
     "jinja2<4.0.0,>=3.1.2",
@@ -21,11 +21,11 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
     "Programming Language :: Python :: 3",
     'Programming Language :: Python :: 3 :: Only',
-    "Programming Language :: Python :: 3.8",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
 ]
 
 [project.urls]
@@ -33,7 +33,7 @@ homepage = "https://github.com/vvanglro/pwhtmltopdf"
 repository = "https://github.com/vvanglro/pwhtmltopdf.git"
 documentation = "https://github.com/vvanglro/pwhtmltopdf"
 
-[tool.pdm.dev-dependencies]
+[dependency-groups]
 dev = [
     "pre-commit<3.0.0,>=2.20.0",
     "pytest<8.0.0,>=7.1.3",
@@ -52,11 +52,11 @@ select = [
 ]
 line-length = 130
 
-[tool.pdm.build]
-includes = []
-excludes = [
+[tool.hatch.build.targets.sdist]
+exclude = [
     "tests/effect",
 ]
+
 [build-system]
-requires = ["pdm-backend"]
-build-backend = "pdm.backend"
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"

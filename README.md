@@ -14,6 +14,22 @@ A modern html to pdf scheme based on playwright, Support more html and css techn
    playwright install chromium
    ```
 
+## Development (uv)
+
+```sh
+# Create/refresh virtual environment and install all dependencies (including dev)
+uv sync --all-groups
+
+# Run tests
+uv run pytest
+
+# Run pre-commit
+uv run pre-commit run --all-files
+
+# Regenerate lock file
+uv lock
+```
+
 ## Usage
 
 Simple example:
