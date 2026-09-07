@@ -57,7 +57,7 @@ async def this_from_string():
         await htp.from_string(content, "from_string.pdf")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(this_from_url())
 ```
 
@@ -75,8 +75,7 @@ from pwhtmltopdf import HtmlToPdf
 
 async def this_render_from_url():
     file_path = pathlib.Path("tests/images.html").absolute()
-    async with HtmlToPdf(static_root="tests/static",
-                         wait_until="load", pdf_kwargs={"print_background": True}) as htp:
+    async with HtmlToPdf(static_root="tests/static", wait_until="load", pdf_kwargs={"print_background": True}) as htp:
         await htp.from_url(
             f"file://{file_path}",
             "tests/effect/from_url/local_url_render.pdf",
@@ -87,22 +86,18 @@ async def this_render_from_url():
 
 async def this_render_from_file():
     htp = HtmlToPdf(static_root="tests/static")
-    await htp.from_file(
-        "tests/images.html", "tests/effect/from_file/images_render.pdf",
-        local_render=True, char_code=123
-    )
+    await htp.from_file("tests/images.html", "tests/effect/from_file/images_render.pdf", local_render=True, char_code=123)
     await htp.close()
 
 
 async def this_render_from_string():
     content = pathlib.Path("tests/images.html").read_text()
     htp = HtmlToPdf(static_root="tests/static")
-    await htp.from_string(content, "tests/effect/from_string/images_render.pdf",
-                          local_render=True, char_code=123)
+    await htp.from_string(content, "tests/effect/from_string/images_render.pdf", local_render=True, char_code=123)
     await htp.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(this_render_from_url())
 ```
 
@@ -115,11 +110,10 @@ from pwhtmltopdf import HtmlToPdf
 
 
 async def example():
-   async with HtmlToPdf(pdf_kwargs={"print_background": True},
-                        page_kwargs={"locale": "de-DE", "is_mobile": True}) as htp:
-      await htp.from_url("https://playwright.dev/", "from_url.pdf")
+    async with HtmlToPdf(pdf_kwargs={"print_background": True}, page_kwargs={"locale": "de-DE", "is_mobile": True}) as htp:
+        await htp.from_url("https://playwright.dev/", "from_url.pdf")
 
 
-if __name__ == '__main__':
-   asyncio.run(example())
+if __name__ == "__main__":
+    asyncio.run(example())
 ```
